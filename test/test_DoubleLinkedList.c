@@ -190,10 +190,10 @@ return NULL				list								list		item2
 //Scenario1 : remove item from head of the list and return it(No item inside the list)
 void test_DoubleLinkedList_remove_item_from_head_list_empty_expect_NULL_returned()
 {
-	ListItem	*returnedItem;
-	ListItem	item1={NULL, NULL, 12};
-	ListItem	item2={NULL, NULL, 24};
-	ListItem	item3={NULL, NULL, 36};
+	ListItem		*returnedItem;
+	ListItem		item1={NULL, NULL, 12};
+	ListItem		item2={NULL, NULL, 24};
+	ListItem		item3={NULL, NULL, 36};
 	DoubleLinkedList	list={NULL, NULL, 0};
 	returnedItem = removeItemFromHead(&list);
 	TEST_ASSERT_EQUAL_PTR(NULL, returnedItem);
@@ -205,10 +205,10 @@ void test_DoubleLinkedList_remove_item_from_head_list_empty_expect_NULL_returned
 void test_DoubleLinkedList_remove_item_from_head_only_1_item_inside_expect_list_head_and_list_NULL_equal_NULL_count_equals_0()
 {
 	int count;
-	ListItem	*returnedItem;
-	ListItem	item1={NULL, NULL, 12};
-	ListItem	item2={NULL, NULL, 24};
-	ListItem	item3={NULL, NULL, 36};
+	ListItem		*returnedItem;
+	ListItem		item1={NULL, NULL, 12};
+	ListItem		item2={NULL, NULL, 24};
+	ListItem		item3={NULL, NULL, 36};
 	DoubleLinkedList	list={NULL, NULL, 0};
 	count=addItemToTail(&item1, &list);			//(Tested on test above)
 	returnedItem = removeItemFromHead(&list); 
@@ -222,9 +222,9 @@ void test_DoubleLinkedList_remove_item_from_head_only_1_item_inside_expect_list_
 void test_DoubleLinkedList_remove_item_from_head_2_items_inside_expect_item2_prev_item2_next_point_to_NULL_head_tail_point_to_item2_count_equals_1()
 {
 	int count;
-	ListItem	*returnedItem;
-	ListItem	item1={NULL, NULL, 12};
-	ListItem	item2={NULL, NULL, 24};
+	ListItem		*returnedItem;
+	ListItem		item1={NULL, NULL, 12};
+	ListItem		item2={NULL, NULL, 24};
 	DoubleLinkedList	list={NULL, NULL, 0};
 	count=addItemToTail(&item1, &list);			//(Tested on test above)
 	count=addItemToTail(&item2, &list);			//(Tested on test above)
@@ -266,10 +266,10 @@ count=2|	 |24		 36
 void test_DoubleLinkedList_remove_item_from_head_3_items_inside_expect_item2_prev_item3_next_point_to_NULL_head_point_to_item2_tail_point_to_item3_count_equals_2()
 {
 	int count;
-	ListItem	*returnedItem;
-	ListItem	item1={NULL, NULL, 12};
-	ListItem	item2={NULL, NULL, 24};
-	ListItem	item3={NULL, NULL, 36};
+	ListItem		*returnedItem;
+	ListItem		item1={NULL, NULL, 12};
+	ListItem		item2={NULL, NULL, 24};
+	ListItem		item3={NULL, NULL, 36};
 	DoubleLinkedList	list={NULL, NULL, 0};
 	count=addItemToTail(&item1, &list);				//(Tested on test above)
 	count=addItemToTail(&item2, &list);				//(Tested on test above)
@@ -295,11 +295,11 @@ void test_DoubleLinkedList_remove_item_from_head_3_items_inside_expect_item2_pre
 void test_DoubleLinkedList_remove_item_from_head_4_items_inside_expect_item2_prev_item4_next_point_to_NULL_head_point_to_item2_tail_point_to_item4_count_equals_3()
 {
 	int count;
-	ListItem	*returnedItem;
-	ListItem	item1={NULL, NULL, 12};
-	ListItem	item2={NULL, NULL, 24};
-	ListItem	item3={NULL, NULL, 36};
-	ListItem	item4={NULL, NULL, 48};
+	ListItem		*returnedItem;
+	ListItem		item1={NULL, NULL, 12};
+	ListItem		item2={NULL, NULL, 24};
+	ListItem		item3={NULL, NULL, 36};
+	ListItem		item4={NULL, NULL, 48};
 	DoubleLinkedList	list={NULL, NULL, 0};
 	count=addItemToTail(&item1, &list);				//(Tested on test above)
 	count=addItemToTail(&item2, &list);				//(Tested on test above)
@@ -338,7 +338,7 @@ return NULL				list								list		item1
 //Scenario1 : Remove item from the tail of list and return it (No item inside the list)
 void test_DoubleLinkedList_remove_item_from_tail_list_empty_expect_NULL_returned()
 {
-	ListItem	*returnedItem;
+	ListItem		*returnedItem;
 	DoubleLinkedList	list={NULL, NULL, 0};
 	returnedItem = removeItemFromTail(&list);
 	TEST_ASSERT_EQUAL_PTR(NULL, returnedItem);
@@ -350,8 +350,8 @@ void test_DoubleLinkedList_remove_item_from_tail_list_empty_expect_NULL_returned
 void test_DoubleLinkedList_remove_item_from_tail_only_1_item_inside_expect_list_head_and_list_NULL_equal_NULL_count_equals_0()
 {
 	int count;
-	ListItem	*returnedItem;
-	ListItem	item1={NULL, NULL, 12};
+	ListItem		*returnedItem;
+	ListItem		item1={NULL, NULL, 12};
 	DoubleLinkedList	list={NULL, NULL, 0};
 	count=addItemToTail(&item1, &list);
 	returnedItem = removeItemFromTail(&list); 
@@ -365,9 +365,9 @@ void test_DoubleLinkedList_remove_item_from_tail_only_1_item_inside_expect_list_
 void test_DoubleLinkedList_remove_item_from_tail_2_items_inside_expect_item1_prev_item1_next_point_to_NULL_head_tail_point_to_item1_count_equals_1()
 {
 	int count;
-	ListItem	*returnedItem;
-	ListItem	item1={NULL, NULL, 12};
-	ListItem	item2={NULL, NULL, 24};
+	ListItem		*returnedItem;
+	ListItem		item1={NULL, NULL, 12};
+	ListItem		item2={NULL, NULL, 24};
 	DoubleLinkedList	list={NULL, NULL, 0};
 	count=addItemToTail(&item1, &list);
 	count=addItemToTail(&item2, &list);
@@ -407,10 +407,10 @@ count=2|	 |12		 24
 void test_DoubleLinkedList_remove_item_from_tail_3_items_inside_expect_item1_prev_item2_next_point_to_NULL_head_point_to_item1_tail_point_to_item2_count_equals_2()
 {
 	int count;
-	ListItem	*returnedItem;
-	ListItem	item1={NULL, NULL, 12};
-	ListItem	item2={NULL, NULL, 24};
-	ListItem	item3={NULL, NULL, 36};
+	ListItem		*returnedItem;
+	ListItem		item1={NULL, NULL, 12};
+	ListItem		item2={NULL, NULL, 24};
+	ListItem		item3={NULL, NULL, 36};
 	DoubleLinkedList	list={NULL, NULL, 0};
 	count=addItemToTail(&item1, &list);
 	count=addItemToTail(&item2, &list);
@@ -434,11 +434,11 @@ void test_DoubleLinkedList_remove_item_from_tail_3_items_inside_expect_item1_pre
 void test_DoubleLinkedList_remove_item_from_tail_4_items_inside_expect_item1_prev_item3_next_point_to_NULL_head_point_to_item1_tail_point_to_item3_count_equals_3()
 {
 	int count;
-	ListItem	*returnedItem;
-	ListItem	item1={NULL, NULL, 12};
-	ListItem	item2={NULL, NULL, 24};
-	ListItem	item3={NULL, NULL, 36};
-	ListItem	item4={NULL, NULL, 48};
+	ListItem		*returnedItem;
+	ListItem		item1={NULL, NULL, 12};
+	ListItem		item2={NULL, NULL, 24};
+	ListItem		item3={NULL, NULL, 36};
+	ListItem		item4={NULL, NULL, 48};
 	DoubleLinkedList	list={NULL, NULL, 0};
 	count=addItemToTail(&item1, &list);
 	count=addItemToTail(&item2, &list);

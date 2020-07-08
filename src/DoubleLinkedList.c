@@ -2,13 +2,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+/* This function is to add items to the head of double linked list.
+    Parameter: 1. Pointer points to items
+               2. Pointer points to double linked list
+    return the number of items in the double linked list
+*/
 int	addItemToHead(ListItem* Item, DoubleLinkedList* accList){
 	int count;
 	if(accList->head==NULL)
-	{
-		accList->head=Item;
-		accList->tail=Item;
+  {
+    accList->head=Item;
+    accList->tail=Item;
 		accList->count=1;
 		count=accList->count;
 		return count;
@@ -25,6 +29,11 @@ int	addItemToHead(ListItem* Item, DoubleLinkedList* accList){
 	}
 }
 
+/* This function is to add items to the tail of double linked list.
+    Parameter: 1. Pointer points to items
+               2. Pointer points to double linked list
+    return the number of items in the double linked list
+*/
 int addItemToTail(ListItem* Item , DoubleLinkedList* accList){
 	int count;
 	if(accList->head==NULL)
@@ -47,6 +56,10 @@ int addItemToTail(ListItem* Item , DoubleLinkedList* accList){
 	}
 }
 
+/* This function is to remove items from the head of given double linked list.
+    Parameter: Pointer points to double linked list
+    return the number of items in the double linked list
+*/
 ListItem* removeItemFromHead(DoubleLinkedList* accList)
 {
 	ListItem	*returnedItem={NULL, NULL, 0};
@@ -72,6 +85,10 @@ ListItem* removeItemFromHead(DoubleLinkedList* accList)
 	}
 }
 
+/* This function is to remove items from the tail of given double linked list.
+    Parameter: Pointer points to double linked list
+    return the number of items in the double linked list
+*/
 ListItem* removeItemFromTail(DoubleLinkedList* accList)
 {
 	ListItem	*returnedItem={NULL, NULL, 0};

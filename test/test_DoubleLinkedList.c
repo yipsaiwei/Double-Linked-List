@@ -29,7 +29,7 @@ Scenario2
                    item2            item1
 head--------------->next----------->next----->NULL
 tail-----------	   -prev<-----------prev
-count=2		     |	|	24				      12
+count=2        |	|	24				      12
                |  |		               ^
                | NULL				         |		           
                -----------------------

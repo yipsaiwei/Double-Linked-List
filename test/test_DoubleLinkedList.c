@@ -1,5 +1,6 @@
 #include "unity.h"
 #include "DoubleLinkedList.h"
+#include  "IntegerListItem.h"
 
 void setUp(void)
 {
@@ -8,6 +9,7 @@ void setUp(void)
 void tearDown(void)
 {
 }
+
 
 /* Add item to head.
  Before			
@@ -40,8 +42,8 @@ void test_DoubleLinkedList_add_item_to_head_given_item1_expect_head_and_tail_poi
 {
   int count;
   DoubleLinkedList	list={NULL, NULL, 0};
-  ListItem		item1={NULL, NULL, 12};
-  count=addItemToHead(&item1, &list );
+  IntegerListItem		item1={NULL, NULL, 12};
+  count=linkedListAddItemToHead((ListItem  *)&item1, &list );
   TEST_ASSERT_EQUAL(1, list.count);
   TEST_ASSERT_EQUAL_PTR(12, list.head->data);
   TEST_ASSERT_EQUAL_PTR(12, list.tail->data);
@@ -53,12 +55,12 @@ void test_DoubleLinkedList_add_item_to_head_given_item1_expect_head_and_tail_poi
 void test_DoubleLinkedList_add_item_to_head_given_2_items_expect_head_points_to_item2_tail_points_to_item1_item2_prev_and_item1_next_point_to_NULL()
 {
   int count;
-  ListItem		item1={NULL, NULL, 12};
-  ListItem		item2={NULL, NULL, 24};
-  DoubleLinkedList	list={&item1, &item1, 1};
+  IntegerListItem		item1={NULL, NULL, 12};
+  IntegerListItem		item2={NULL, NULL, 24};
+  DoubleLinkedList	list={(ListItem  *)&item1, (ListItem  *)&item1, 1};
   item1.next=NULL;
   item1.prev=NULL;
-  count=addItemToHead(&item2, &list );
+  count=linkedListAddItemToHead((ListItem  *)&item2, &list );
   TEST_ASSERT_EQUAL(2, list.count);
   TEST_ASSERT_EQUAL(2, count);
   TEST_ASSERT_EQUAL_PTR(24, list.head->data);
@@ -84,19 +86,19 @@ count=3		    |	  |	36		        24					   12
 void test_DoubleLinkedList_add_item_to_head_given_three_items_expect_head_points_to_item3_tail_points_to_item1__item3_prev_and_item1_next_point_to_NULL()
 {
   int count;
-  ListItem		item1={NULL, NULL, 12};
-  ListItem		item2={NULL, NULL, 24};
-  ListItem		item3={NULL, NULL, 36};
-  DoubleLinkedList	list={&item2, &item1, 2};
-  item2.next=&item1;
-  item1.prev=&item2;
+  IntegerListItem		item1={NULL, NULL, 12};
+  IntegerListItem		item2={NULL, NULL, 24};
+  IntegerListItem		item3={NULL, NULL, 36};
+  DoubleLinkedList	list={(ListItem *)&item2,(ListItem *) &item1, 2};
+  item2.next=(ListItem *)&item1;
+  item1.prev=(ListItem *)&item2;
   item2.prev=NULL;
   item1.next=NULL;
-  count=addItemToHead(&item3, &list );
+  count=linkedListAddItemToHead((ListItem  *)&item3, &list );
   TEST_ASSERT_EQUAL(3, list.count);
   TEST_ASSERT_EQUAL(3, count);
-  TEST_ASSERT_EQUAL_PTR(36, list.head->data);
-  TEST_ASSERT_EQUAL_PTR(12, list.tail->data);
+  TEST_ASSERT_EQUAL(36, list.head->data);
+  TEST_ASSERT_EQUAL(12, list.tail->data);
   TEST_ASSERT_EQUAL_PTR(&item1, item2.next);
   TEST_ASSERT_EQUAL_PTR(&item2, item1.prev);
   TEST_ASSERT_EQUAL_PTR(&item3, item2.prev);
@@ -137,9 +139,9 @@ count=2		     |	  |	12		     24
 void test_DoubleLinkedList_add_item_to_tail_given_item1_expect_head_and_tail_point_to_item_1_item1_prev_and_item_1_next_point_to_NULL()
 {
   int count;
-  ListItem		item1={NULL, NULL, 12};
+  IntegerListItem		item1={NULL, NULL, 12};
   DoubleLinkedList	list={NULL, NULL, 0};
-  count=addItemToTail(&item1, &list);	
+  count=linkedListAddItemToTail((ListItem  *)&item1, &list);	
   TEST_ASSERT_EQUAL(1, list.count);
   TEST_ASSERT_EQUAL(1, count);
   TEST_ASSERT_EQUAL_PTR(&item1, list.head);
@@ -154,12 +156,12 @@ void test_DoubleLinkedList_add_item_to_tail_given_item1_expect_head_and_tail_poi
 void test_DoubleLinkedList_add_item_to_tail_given_item2_expect_head_points_to_item_1_tail_point_to_item2_item1_prev_and_item_2_next_point_to_NULL()
 {
   int count;
-  ListItem		item1={NULL, NULL, 12};
-  ListItem		item2={NULL, NULL, 24};
-  DoubleLinkedList	list={&item1, &item1, 1};
+  IntegerListItem		item1={NULL, NULL, 12};
+  IntegerListItem		item2={NULL, NULL, 24};
+  DoubleLinkedList	list={(ListItem *)&item1, (ListItem *)&item1, 1};
   item1.next=NULL;
   item1.prev=NULL;
-  count=addItemToTail(&item2, &list);				
+  count=linkedListAddItemToTail((ListItem  *)&item2, &list);				
   TEST_ASSERT_EQUAL(2, list.count);
   TEST_ASSERT_EQUAL(2, count);
   TEST_ASSERT_EQUAL_PTR(&item1, list.head);
@@ -186,15 +188,15 @@ count=3		    |	  |	12		       24					        36
 void test_DoubleLinkedList_add_item_to_tail_given_item3_expect_head_points_to_item_1_tail_point_to_item3_item1_prev_and_item_2_next_point_to_NULL()
 {
   int count;
-  ListItem		item1={NULL, NULL, 12};
-  ListItem		item2={NULL, NULL, 24};
-  ListItem		item3={NULL, NULL, 36};
-  DoubleLinkedList	list={&item1, &item2, 2};
+  IntegerListItem		item1={NULL, NULL, 12};
+  IntegerListItem		item2={NULL, NULL, 24};
+  IntegerListItem		item3={NULL, NULL, 36};
+  DoubleLinkedList	list={(ListItem  *)&item1, (ListItem  *)&item2, 2};
   item2.next=NULL;
-  item2.prev=&item1;
-  item1.next=&item2;
+  item2.prev=(ListItem  *)&item1;
+  item1.next=(ListItem  *)&item2;
   item1.prev=NULL;
-  count=addItemToTail(&item3, &list);
+  count=linkedListAddItemToTail((ListItem  *)&item3, &list);
   TEST_ASSERT_EQUAL(3, list.count);
   TEST_ASSERT_EQUAL(3, count);
   TEST_ASSERT_EQUAL_PTR(12, list.head->data);
@@ -239,9 +241,9 @@ count=2		  |	  |	12		       24
 //Scenario1 : remove item from head of the list and return it(No item inside the list)
 void test_DoubleLinkedList_remove_item_from_head_list_empty_expect_NULL_returned()
 {
-  ListItem		*returnedItem;
+  IntegerListItem		*returnedItem;
   DoubleLinkedList	list={NULL, NULL, 0};
-  returnedItem = removeItemFromHead(&list);
+  returnedItem = (IntegerListItem *)linkedListRemoveItemFromHead(&list);
   TEST_ASSERT_EQUAL_PTR(NULL, returnedItem);
   TEST_ASSERT_EQUAL_PTR(NULL, list.head);
   TEST_ASSERT_EQUAL_PTR(NULL, list.tail);
@@ -250,14 +252,14 @@ void test_DoubleLinkedList_remove_item_from_head_list_empty_expect_NULL_returned
 //Scenario2 : remove item from the head of the list and return it(Only 1 item inside the list)
 void test_DoubleLinkedList_remove_item_from_head_only_1_item_inside_expect_list_head_and_list_NULL_equal_NULL_count_equals_0()
 {
-  ListItem		*returnedItem;
-  ListItem		item1={NULL, NULL, 12};
-  ListItem		item2={NULL, NULL, 24};
-  ListItem		item3={NULL, NULL, 36};
-  DoubleLinkedList	list={&item1, &item1, 1};
+  IntegerListItem		*returnedItem;
+  IntegerListItem		item1={NULL, NULL, 12};
+  IntegerListItem		item2={NULL, NULL, 24};
+  IntegerListItem		item3={NULL, NULL, 36};
+  DoubleLinkedList	list={(ListItem *)&item1, (ListItem *)&item1, 1};
 	item1.next=NULL;
   item1.prev=NULL;  
-  returnedItem = removeItemFromHead(&list); 
+  returnedItem = (IntegerListItem *)linkedListRemoveItemFromHead(&list); 
   TEST_ASSERT_EQUAL_PTR(12, returnedItem->data);
   TEST_ASSERT_EQUAL_PTR(NULL, item1.next);
   TEST_ASSERT_EQUAL_PTR(NULL, item1.prev);
@@ -269,15 +271,15 @@ void test_DoubleLinkedList_remove_item_from_head_only_1_item_inside_expect_list_
 //Scenario3 : remove item from the head of the list and return it(There are 2 items inside the list)
 void test_DoubleLinkedList_remove_item_from_head_2_items_inside_expect_item2_prev_item2_next_point_to_NULL_head_tail_point_to_item2_count_equals_1()
 {
-  ListItem		*returnedItem;
-  ListItem		item1={NULL, NULL, 12};
-  ListItem		item2={NULL, NULL, 24};
-  DoubleLinkedList	list={&item1, &item2, 2};
-  item1.next=&item2;
+  IntegerListItem		*returnedItem;
+  IntegerListItem		item1={NULL, NULL, 12};
+  IntegerListItem		item2={NULL, NULL, 24};
+  DoubleLinkedList	list={(ListItem *)&item1, (ListItem *)&item2, 2};
+  item1.next=(ListItem *)&item2;
   item1.prev=NULL;
   item2.next=NULL;
-  item2.prev=&item1;
-  returnedItem = removeItemFromHead(&list); 
+  item2.prev=(ListItem *)&item1;
+  returnedItem = (IntegerListItem *)linkedListRemoveItemFromHead(&list); 
   TEST_ASSERT_EQUAL_PTR(12, returnedItem->data);
   TEST_ASSERT_EQUAL_PTR(NULL, item1.next);
   TEST_ASSERT_EQUAL_PTR(NULL, item1.prev);
@@ -316,18 +318,18 @@ count=2|	   |24		      36
 //Scenario4 : remove item from the head of the list and return it(There are 3 items inside the list)
 void test_DoubleLinkedList_remove_item_from_head_3_items_inside_expect_item2_prev_item3_next_point_to_NULL_head_point_to_item2_tail_point_to_item3_count_equals_2()
 {
-  ListItem		*returnedItem;
-  ListItem		item1={NULL, NULL, 12};
-  ListItem		item2={NULL, NULL, 24};
-  ListItem		item3={NULL, NULL, 36};
-  DoubleLinkedList	list={&item1, &item3, 3};
-  item1.next=&item2;
+  IntegerListItem		*returnedItem;
+  IntegerListItem		item1={NULL, NULL, 12};
+  IntegerListItem		item2={NULL, NULL, 24};
+  IntegerListItem		item3={NULL, NULL, 36};
+  DoubleLinkedList	list={(ListItem *)&item1, (ListItem *)&item3, 3};
+  item1.next=(ListItem *)&item2;
   item1.prev=NULL;
-  item2.next=&item3;
-  item2.prev=&item1;
+  item2.next=(ListItem *)&item3;
+  item2.prev=(ListItem *)&item1;
   item3.next=NULL;
-  item3.prev=&item2;
-  returnedItem = removeItemFromHead(&list); 
+  item3.prev=(ListItem *)&item2;
+  returnedItem = (IntegerListItem *)linkedListRemoveItemFromHead(&list); 
   TEST_ASSERT_EQUAL_PTR(12, returnedItem->data);
   TEST_ASSERT_EQUAL_PTR(NULL, item1.next);
   TEST_ASSERT_EQUAL_PTR(NULL, item1.prev);
@@ -336,9 +338,9 @@ void test_DoubleLinkedList_remove_item_from_head_3_items_inside_expect_item2_pre
   TEST_ASSERT_EQUAL_PTR(NULL, item3.next);
   TEST_ASSERT_EQUAL_PTR(&item2, item3.prev);
   TEST_ASSERT_EQUAL_PTR(&item2, list.head);
-  TEST_ASSERT_EQUAL_PTR(24, list.head->data);
+  TEST_ASSERT_EQUAL(24, list.head->data);
   TEST_ASSERT_EQUAL_PTR(&item3, list.tail);
-  TEST_ASSERT_EQUAL_PTR(36, list.tail->data);
+  TEST_ASSERT_EQUAL(36, list.tail->data);
   TEST_ASSERT_EQUAL(2, list.count);
 }
 
@@ -368,21 +370,21 @@ count=3|	   |24		      36        48
 */
 void test_DoubleLinkedList_remove_item_from_head_4_items_inside_expect_item2_prev_item4_next_point_to_NULL_head_point_to_item2_tail_point_to_item4_count_equals_3()
 {
-  ListItem		*returnedItem;
-  ListItem		item1={NULL, NULL, 12};
-  ListItem		item2={NULL, NULL, 24};
-  ListItem		item3={NULL, NULL, 36};
-  ListItem		item4={NULL, NULL, 48};
-  DoubleLinkedList	list={&item1, &item4, 4};
-  item1.next=&item2;
+  IntegerListItem		*returnedItem;
+  IntegerListItem		item1={NULL, NULL, 12};
+  IntegerListItem		item2={NULL, NULL, 24};
+  IntegerListItem		item3={NULL, NULL, 36};
+  IntegerListItem		item4={NULL, NULL, 48};
+  DoubleLinkedList	list={(ListItem *)&item1, (ListItem *)&item4, 4};
+  item1.next=(ListItem *)&item2;
   item1.prev=NULL;
-  item2.next=&item3;
-  item2.prev=&item1;
-  item3.next=&item4;
-  item3.prev=&item2;
+  item2.next=(ListItem *)&item3;
+  item2.prev=(ListItem *)&item1;
+  item3.next=(ListItem *)&item4;
+  item3.prev=(ListItem *)&item2;
   item4.next=NULL;
-  item4.prev=&item3;
-  returnedItem = removeItemFromHead(&list); 
+  item4.prev=(ListItem *)&item3;
+  returnedItem = (IntegerListItem *)linkedListRemoveItemFromHead(&list); 
   TEST_ASSERT_EQUAL_PTR(12, returnedItem->data);
   TEST_ASSERT_EQUAL_PTR(&item3, item2.next);
   TEST_ASSERT_EQUAL_PTR(NULL, item2.prev);
@@ -427,9 +429,9 @@ count=2		    |	  |	12		        24                count=1		  12
 //Scenario1 : Remove item from the tail of list and return it (No item inside the list)
 void test_DoubleLinkedList_remove_item_from_tail_list_empty_expect_NULL_returned()
 {
-  ListItem		*returnedItem;
+  IntegerListItem		*returnedItem;
   DoubleLinkedList	list={NULL, NULL, 0};
-  returnedItem = removeItemFromTail(&list);
+  returnedItem = (IntegerListItem *)linkedListRemoveItemFromTail(&list);
   TEST_ASSERT_EQUAL_PTR(NULL, returnedItem);
   TEST_ASSERT_EQUAL_PTR(NULL, list.tail);
   TEST_ASSERT_EQUAL_PTR(NULL, list.head);
@@ -438,13 +440,13 @@ void test_DoubleLinkedList_remove_item_from_tail_list_empty_expect_NULL_returned
 //Scenario2 : Remove item from the tail of list and return it (Only 1 item inside the list)
 void test_DoubleLinkedList_remove_item_from_tail_only_1_item_inside_expect_list_head_and_list_NULL_equal_NULL_count_equals_0()
 {
-  ListItem		*returnedItem;
-  ListItem		item1={NULL, NULL, 12};
-  DoubleLinkedList	list={&item1, &item1, 1};
+  IntegerListItem		*returnedItem;
+  IntegerListItem		item1={NULL, NULL, 12};
+  DoubleLinkedList	list={(ListItem *)&item1,(ListItem *) &item1, 1};
   item1.next=NULL;
   item1.prev=NULL;
-  returnedItem = removeItemFromTail(&list); 
-  TEST_ASSERT_EQUAL_PTR(12, returnedItem->data);
+  returnedItem = (IntegerListItem *)linkedListRemoveItemFromTail(&list); 
+  TEST_ASSERT_EQUAL(12, returnedItem->data);
   TEST_ASSERT_EQUAL_PTR(NULL, item1.next);
   TEST_ASSERT_EQUAL_PTR(NULL, item1.prev);
   TEST_ASSERT_EQUAL_PTR(NULL, list.head);
@@ -455,16 +457,16 @@ void test_DoubleLinkedList_remove_item_from_tail_only_1_item_inside_expect_list_
 //Scenario3 : Remove item from the tail of list and return it (There are 2 items inside the list)
 void test_DoubleLinkedList_remove_item_from_tail_2_items_inside_expect_item1_prev_item1_next_point_to_NULL_head_tail_point_to_item1_count_equals_1()
 {
-  ListItem		*returnedItem;
-  ListItem		item1={NULL, NULL, 12};
-  ListItem		item2={NULL, NULL, 24};
-  DoubleLinkedList	list={&item1, &item2, 2};
-  item1.next=&item2;
+  IntegerListItem		*returnedItem;
+  IntegerListItem		item1={NULL, NULL, 12};
+  IntegerListItem		item2={NULL, NULL, 24};
+  DoubleLinkedList	list={(ListItem *)&item1, (ListItem *)&item2, 2};
+  item1.next=(ListItem *)&item2;
   item1.prev=NULL;
   item2.next=NULL;
-  item2.prev=&item1;
-  returnedItem = removeItemFromTail(&list); 
-  TEST_ASSERT_EQUAL_PTR(24, returnedItem->data);
+  item2.prev=(ListItem *)&item1;
+  returnedItem = (IntegerListItem *)linkedListRemoveItemFromTail(&list); 
+  TEST_ASSERT_EQUAL(24, returnedItem->data);
   TEST_ASSERT_EQUAL_PTR(NULL, item1.next);
   TEST_ASSERT_EQUAL_PTR(NULL, item1.prev);
   TEST_ASSERT_EQUAL_PTR(NULL, item2.prev);
@@ -499,18 +501,18 @@ count=2|	  |12		       24
 //Scenario4 : Remove item from the tail of list and return it (There are 3 items inside the list)
 void test_DoubleLinkedList_remove_item_from_tail_3_items_inside_expect_item1_prev_item2_next_point_to_NULL_head_point_to_item1_tail_point_to_item2_count_equals_2()
 {
-  ListItem		*returnedItem;
-  ListItem		item1={NULL, NULL, 12};
-  ListItem		item2={NULL, NULL, 24};
-  ListItem		item3={NULL, NULL, 36};
-  DoubleLinkedList	list={&item1, &item3, 3};
-  item1.next=&item2;
+  IntegerListItem		*returnedItem;
+  IntegerListItem		item1={NULL, NULL, 12};
+  IntegerListItem		item2={NULL, NULL, 24};
+  IntegerListItem		item3={NULL, NULL, 36};
+  DoubleLinkedList	list={(ListItem *)&item1, (ListItem *)&item3, 3};
+  item1.next=(ListItem *)&item2;
   item1.prev=NULL;
-  item2.next=&item3;
-  item2.prev=&item1;
+  item2.next=(ListItem *)&item3;
+  item2.prev=(ListItem *)&item1;
   item3.next=NULL;
-  item3.prev=&item2;
-  returnedItem = removeItemFromTail(&list); 
+  item3.prev=(ListItem *)&item2;
+  returnedItem = (IntegerListItem *)linkedListRemoveItemFromTail(&list); 
   TEST_ASSERT_EQUAL_PTR(36, returnedItem->data);
   TEST_ASSERT_EQUAL_PTR(&item2, item1.next);
   TEST_ASSERT_EQUAL_PTR(NULL, item1.prev);
@@ -549,21 +551,21 @@ count=3|	   |12		      24        36
 */
 void test_DoubleLinkedList_remove_item_from_tail_4_items_inside_expect_item1_prev_item3_next_point_to_NULL_head_point_to_item1_tail_point_to_item3_count_equals_3()
 {
-  ListItem		*returnedItem;
-  ListItem		item1={NULL, NULL, 12};
-  ListItem		item2={NULL, NULL, 24};
-  ListItem		item3={NULL, NULL, 36};
-  ListItem		item4={NULL, NULL, 48};
-  DoubleLinkedList	list={&item1, &item4, 4};
-  item1.next=&item2;
+  IntegerListItem		*returnedItem;
+  IntegerListItem		item1={NULL, NULL, 12};
+  IntegerListItem		item2={NULL, NULL, 24};
+  IntegerListItem		item3={NULL, NULL, 36};
+  IntegerListItem		item4={NULL, NULL, 48};
+  DoubleLinkedList	list={(ListItem *)&item1,(ListItem  *) &item4, 4};
+  item1.next=(ListItem *)&item2;
   item1.prev=NULL;
-  item2.next=&item3;
-  item2.prev=&item1;
-  item3.next=&item4;
-  item3.prev=&item2;
+  item2.next=(ListItem *)&item3;
+  item2.prev=(ListItem *)&item1;
+  item3.next=(ListItem *)&item4;
+  item3.prev=(ListItem *)&item2;
   item4.next=NULL;
-  item4.prev=&item3;
-  returnedItem = removeItemFromTail(&list); 
+  item4.prev=(ListItem *)&item3;
+  returnedItem = (IntegerListItem *)linkedListRemoveItemFromTail(&list); 
   TEST_ASSERT_EQUAL_PTR(48, returnedItem->data);
   TEST_ASSERT_EQUAL_PTR(&item2, item1.next);
   TEST_ASSERT_EQUAL_PTR(NULL, item1.prev);
@@ -575,3 +577,80 @@ void test_DoubleLinkedList_remove_item_from_tail_4_items_inside_expect_item1_pre
   TEST_ASSERT_EQUAL_PTR(&item3, list.tail);
   TEST_ASSERT_EQUAL(3, list.count);
 }
+
+void  test_linkedListCreateListItem_given_data(){
+  int data1 = 294;
+  IntegerListItem  *item = (IntegerListItem *)linkedListCreateListItem((void  *)data1);
+  TEST_ASSERT_NOT_NULL(item);
+  TEST_ASSERT_EQUAL(294, item->data);
+  TEST_ASSERT_EQUAL_PTR(NULL, item->prev);
+  TEST_ASSERT_EQUAL_PTR(NULL, item->next);
+  free(item);
+}
+
+
+void  test_linkedListCreateListItem_given_data_struct(){
+  Data data1 = {862, 28.3332};
+  ListItem  *item = linkedListCreateListItem(&data1);
+  Data  *dataptr = item->data;
+  TEST_ASSERT_NOT_NULL(item);
+  TEST_ASSERT_EQUAL(862, dataptr->val1);
+  TEST_ASSERT_EQUAL_FLOAT(28.3332, dataptr->val2);
+  TEST_ASSERT_EQUAL_PTR(NULL, item->prev);
+  TEST_ASSERT_EQUAL_PTR(NULL, item->next);
+  free(item);
+}
+
+void  freeData(void *dataToFree){
+  Data  *data = dataToFree;
+  if(data)
+    free(data);
+}
+
+void  test_linkedListFreeList(){
+  Data  data1 = {10101, 293e-2};
+  Data  data2 = {0x284, 12.456};
+  Data  data3 = {0111, 5.6666};
+  ListItem  *item1 = linkedListCreateListItem((Data *)&data1);
+  ListItem  *item2 = linkedListCreateListItem((Data *)&data2);
+  ListItem  *item3 = linkedListCreateListItem((Data *)&data3);
+  DoubleLinkedList  list = {NULL, NULL, 0};
+  linkedListAddItemToHead(item1, &list);
+  TEST_ASSERT_EQUAL_PTR(item1, list.head);
+  TEST_ASSERT_EQUAL_PTR(item1, list.tail);
+  //Typecast list.head->data from void* to Data* type
+  TEST_ASSERT_EQUAL(10101, ((Data  *)(list.head->data))->val1);   
+  TEST_ASSERT_EQUAL(10101, ((Data  *)(list.tail->data))->val1);
+  TEST_ASSERT_EQUAL_FLOAT(293e-2, ((Data  *)(list.head->data))->val2);
+  TEST_ASSERT_EQUAL_FLOAT(293e-2, ((Data  *)(list.tail->data))->val2);
+  linkedListAddItemToHead(item2, &list);
+  TEST_ASSERT_EQUAL(0x284, ((Data  *)(list.head->data))->val1);
+  TEST_ASSERT_EQUAL(10101, ((Data  *)(list.tail->data))->val1);
+  TEST_ASSERT_EQUAL_FLOAT(293e-2, ((Data  *)(list.tail->data))->val2);
+  TEST_ASSERT_EQUAL_FLOAT(12.456, ((Data  *)(list.head->data))->val2);
+  linkedListAddItemToHead(item3, &list);
+  TEST_ASSERT_EQUAL(0111, ((Data  *)(list.head->data))->val1);
+  TEST_ASSERT_EQUAL(10101, ((Data  *)(list.tail->data))->val1);
+  TEST_ASSERT_EQUAL(0x284, ((Data  *)(list.head->next->data))->val1);
+  TEST_ASSERT_EQUAL(0x284, ((Data  *)(list.tail->prev->data))->val1);
+  TEST_ASSERT_EQUAL_FLOAT(293e-2, ((Data  *)(list.tail->data))->val2);
+  TEST_ASSERT_EQUAL_FLOAT(5.6666, ((Data  *)(list.head->data))->val2);
+  TEST_ASSERT_EQUAL_FLOAT(12.456, ((Data  *)(list.head->next->data))->val2);
+  TEST_ASSERT_EQUAL_FLOAT(12.456, ((Data  *)(list.tail->prev->data))->val2);
+  //linkedListFreeList(&list, freeData);
+}
+
+
+/*
+struct  Data  {
+  int val1;
+  double  val2;
+};
+void  linkedListFreeList(DoubleLinkedList *list, void (*freeFunction)(void *) );
+void  freeData(void *data){
+  
+}
+void  test_linkedListFreeList(){
+  linkedListFreeList(list, freeData);
+}
+*/

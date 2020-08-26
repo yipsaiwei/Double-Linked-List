@@ -7,15 +7,15 @@
                2. Pointer points to double linked list
     return the number of items in the double linked list
 */
-int	addItemToHead(ListItem* Item, DoubleLinkedList* accList){
-	int count;
-	if(accList->head==NULL)
+int	linkedListAddItemToHead(ListItem* Item, DoubleLinkedList* accList){
+  int count;
+  if(accList->head==NULL)
   {
     accList->head=Item;
     accList->tail=Item;
-		accList->count=1;
-		count=accList->count;
-		return count;
+    accList->count=1;
+    count=accList->count;
+    return count;
 	}
 	else
 	{
@@ -34,7 +34,7 @@ int	addItemToHead(ListItem* Item, DoubleLinkedList* accList){
                2. Pointer points to double linked list
     return the number of items in the double linked list
 */
-int addItemToTail(ListItem* Item , DoubleLinkedList* accList){
+int linkedListAddItemToTail(ListItem* Item , DoubleLinkedList* accList){
 	int count;
 	if(accList->head==NULL)
 	{
@@ -60,7 +60,7 @@ int addItemToTail(ListItem* Item , DoubleLinkedList* accList){
     Parameter: Pointer points to double linked list
     return the number of items in the double linked list
 */
-ListItem* removeItemFromHead(DoubleLinkedList* accList)
+ListItem* linkedListRemoveItemFromHead(DoubleLinkedList* accList)
 {
 	ListItem	*returnedItem={NULL, NULL, 0};
 	if(accList->head==NULL)
@@ -89,7 +89,7 @@ ListItem* removeItemFromHead(DoubleLinkedList* accList)
     Parameter: Pointer points to double linked list
     return the number of items in the double linked list
 */
-ListItem* removeItemFromTail(DoubleLinkedList* accList)
+ListItem* linkedListRemoveItemFromTail(DoubleLinkedList* accList)
 {
 	ListItem	*returnedItem={NULL, NULL, 0};
 	if(accList->head==NULL)
@@ -112,4 +112,29 @@ ListItem* removeItemFromTail(DoubleLinkedList* accList)
 		accList->count--;
 		return	returnedItem;
 	}
+}
+
+ListItem  *linkedListCreateListItem(void  *data){
+  ListItem  *item = malloc(sizeof(ListItem));   
+  item->next = NULL;
+  item->prev = NULL;
+  item->data = data;
+  return  item;
+}
+
+void  linkedListFreeListItem(ListItem *itemToFree){
+  if(itemToFree)
+    free(itemToFree);
+}
+
+void  linkedListFreeList(DoubleLinkedList *list, void (*freeFunction)(void *) ){
+  ListItem  *listptr;
+  while(list->head != NULL){
+    listptr = list->head;
+    list->head = list->head->next;
+    freeFunction(listptr->data);
+    linkedListFreeListItem(listptr);
+    }
+   if(list)
+     free(list);
 }

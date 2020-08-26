@@ -31,9 +31,9 @@ Scenario2
                    item2            item1
 head--------------->next----------->next----->NULL
 tail-----------	   -prev<-----------prev
-count=2        |	|	24				      12
-               |  |		               ^
-               | NULL				         |		           
+count=2        |  |24		    12
+               |  |		     ^
+               | NULL		     |		           
                -----------------------
 */
 
@@ -73,12 +73,12 @@ void test_DoubleLinkedList_add_item_to_head_given_2_items_expect_head_points_to_
 /* Add item to head.
 Scenario3
 ~~~~~~~~~
-list				        item3		    item2			 	        item1
+list		   item3	item2		item1
 head--------------->next-------->next----------->next------->NULL
 tail-----------    -prev<--------prev<-----------prev
-count=3		    |	  |	36		        24					   12
-              |   |				  					            ^	 
-              |  NULL		      					          |	
+count=3	      |	  | 36		  24		  12
+              |   |				  ^	 
+              |  NULL		      		  |	
                -----------------------------------
 */
 
@@ -126,12 +126,12 @@ count=1		  12
           v
 Scenario2
 ~~~~~~~~~
-list				        item1		    item2
+list		   item1         item2
 head--------------->next-------->next----->NULL
 tail-----------    -prev<--------prev
-count=2		     |	  |	12		     24
-               |    |				      ^	
-               |    NULL		      | 
+count=2	       |  | 12		  24
+               |  |		   ^	
+               |  NULL		   | 
                --------------------               
 */
 
@@ -175,13 +175,13 @@ void test_DoubleLinkedList_add_item_to_tail_given_item2_expect_head_points_to_it
 }
 /* Add item to tail.
 Scenario3
-list				        item1		    item2			 	        item3
+list	           item1         item2		   item3
 head--------------->next-------->next-------------->next------->NULL
 tail-----------    -prev<--------prev<--------------prev
-count=3		    |	  |	12		       24					        36
-              |   |				  					                ^	 
-              |  NULL		      					              |	
-               ----------------------------------------
+count=3	      |	  | 12		 24	            36
+              |   |			             ^	 
+              |  NULL		      	             |	
+              ----------------------------------------
 */
 
 //Scenario3 : Add 3 items(item1, item2, item3) to the list from tail
@@ -221,20 +221,20 @@ count=0
 Scenario2
 ~~~~~~~~~                 
 Before                                After
-list		    item1	                    list
+list       item1	              list
 head------->next-------->NULL         head----->NULL	
 tail------->prev-------->NULL         tail----->NULL	
-count=1		   12						            count=0	
+count=1     12			      count=0	
 
 Scenario3
 ~~~~~~~~~ 
 Before                                              After
-list				     item1		    item2                 head--------->next----->NULL
+list		item1	     item2                 head--------->next----->NULL
 head------------>next-------->next----->NULL        tail--------->prev----->NULL
 tail--------    -prev<--------prev                  count=1		  24
-count=2		  |	  |	12		       24
-            |   |				        ^	
-            |  NULL		          |	
+count=2	    |  | 12	      24
+            |  |	       ^	
+            | NULL	       |	
             --------------------
 */
 
@@ -296,23 +296,23 @@ void test_DoubleLinkedList_remove_item_from_head_2_items_inside_expect_item2_pre
 Scenario4
 ~~~~~~~~~
 Before
-list				        item1		     item2		  item3
+list	           item1        item2	    item3
 head--------------->next-------->next------>next---->NULL
 tail-----------    -prev<--------prev<------prev
-count=3		    |	  |	12		       24			    36
-              |   |				  			          ^	
-              |  NULL		      			        |	
+count=3	      |	  |	12       24	    36
+              |   |			     ^	
+              |  NULL		             |	
                ------------------------------
                
 After
-list		  item2		 item3
+list	     item2	item3
 head--------->next------>next----->NULL
 tail---      -prev<------prev
-count=2|	   |24		      36
-       |     |			      ^
-	     |	  NULL          |
-	     |                  |
-	     -------------------
+count=2|     | 24	 36
+       |     |		 ^
+       |   NULL          |
+       |                 |
+       -------------------
 */
 
 //Scenario4 : remove item from the head of the list and return it(There are 3 items inside the list)
@@ -350,23 +350,23 @@ void test_DoubleLinkedList_remove_item_from_head_3_items_inside_expect_item2_pre
 ScenarioEx
 ~~~~~~~~~
 Before
-list				        item1		     item2		  item3    item4
+list		   item1	item2	   item3    item4
 head--------------->next-------->next------>next---->next---->NULL
 tail-----------    -prev<--------prev<------prev<----prev
-count=4		    |	  |	12		       24			    36        48
-              |   |				  			                    ^	
-              |  NULL		      			                  |	
+count=4	      |	  |  12		  24	    36        48
+              |   |			              ^	
+              |  NULL		      		      |	
                ---------------------------------------
                
 After
-list		  item2		 item3            item4
+list	     item2	item3     item4
 head--------->next------>next----->next--->NULL
 tail---      -prev<------prev<-----prev
-count=3|	   |24		      36        48
-       |     |			                 ^
-	     |	  NULL                     |
-	     |                             |
-	     ------------------------------
+count=3|     |24	 36        48
+       |     |			    ^
+       |   NULL                     |
+       |                            |
+       ------------------------------
 */
 void test_DoubleLinkedList_remove_item_from_head_4_items_inside_expect_item2_prev_item4_next_point_to_NULL_head_point_to_item2_tail_point_to_item4_count_equals_3()
 {
@@ -417,12 +417,12 @@ count=1		  12                      count-0
 Scenario3
 ~~~~~~~~~
 Before                                             After
-list				        item1		    item2               list		      item1
+list		   item1	 item2               list	 item1
 head--------------->next-------->next----->NULL     head--------->next----->NULL
 tail-----------    -prev<--------prev               tail--------->prev----->NULL
-count=2		    |	  |	12		        24                count=1		  12
-              |   |				        ^	                
-              |  NULL		          |	              
+count=2	      |	  |	12	  24                count=1		  12
+              |   |		  ^	                
+              |  NULL		  |	              
               --------------------             
 */
 
@@ -480,22 +480,22 @@ void test_DoubleLinkedList_remove_item_from_tail_2_items_inside_expect_item1_pre
 Scenario4
 ~~~~~~~~~
 Before
-list				        item1		     item2		  item3
+list		   item1        item2	   item3
 head--------------->next-------->next------>next---->NULL
 tail-----------    -prev<--------prev<------prev
-count=3		    |	  |	12		        24			  36
-              |   |				  			           ^	
-              |  NULL		      			         |	
+count=3	      |	  |	12	 24	    36
+              |   |			    ^	
+              |  NULL		      	    |	
                ------------------------------
 After
 list		  item1		 item2
 head--------->next------>next----->NULL
 tail---      -prev<------prev
-count=2|	  |12		       24
-       |     |			     ^
-       |	NULL		       |
-	     |                 |
-	     -------------------
+count=2|     | 12	 24
+       |     |		  ^
+       |    NULL	  |
+       |                  |
+        -------------------
 */
 
 //Scenario4 : Remove item from the tail of list and return it (There are 3 items inside the list)
@@ -531,23 +531,23 @@ void test_DoubleLinkedList_remove_item_from_tail_3_items_inside_expect_item1_pre
 ScenarioEx
 ~~~~~~~~~
 Before
-list				        item1		     item2		  item3    item4
+list		   item1	item2	   item3    item4
 head--------------->next-------->next------>next---->next---->NULL
 tail-----------    -prev<--------prev<------prev<----prev
-count=4		    |	  |	12		       24			    36        48
-              |   |				  			                    ^	
-              |  NULL		      			                  |	
+count=4	      |	  |  12		 24	    36        48
+              |   |				      ^	
+              |  NULL		      		      |	
                ---------------------------------------
                
 After
-list		      item1		 item2       item3
+list	     item1      item2     item3
 head--------->next------>next----->next--->NULL
 tail---      -prev<------prev<-----prev
-count=3|	   |12		      24        36
-       |     |			                 ^
-	     |	  NULL                     |
-	     |                             |
-	     ------------------------------
+count=3|     |12	 24        36
+       |     |			    ^
+       |   NULL                     |
+       |                            |
+       ------------------------------
 */
 void test_DoubleLinkedList_remove_item_from_tail_4_items_inside_expect_item1_prev_item3_next_point_to_NULL_head_point_to_item1_tail_point_to_item3_count_equals_3()
 {
@@ -577,6 +577,7 @@ void test_DoubleLinkedList_remove_item_from_tail_4_items_inside_expect_item1_pre
   TEST_ASSERT_EQUAL_PTR(&item3, list.tail);
   TEST_ASSERT_EQUAL(3, list.count);
 }
+<<<<<<< HEAD
 
 void  test_linkedListCreateListItem_given_data(){
   int data1 = 294;
@@ -654,3 +655,5 @@ void  test_linkedListFreeList(){
   linkedListFreeList(list, freeData);
 }
 */
+=======
+>>>>>>> 36e643cb719ca918896c8993c41eb400f1469a16

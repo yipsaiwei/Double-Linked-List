@@ -11,6 +11,66 @@ void tearDown(void)
 }
 
 
+void  freeData(void *dataToFree){
+  Data  *data = dataToFree;
+  if(data)
+    free(data);
+}
+
+void  test_createList_given_empty(){
+  DoubleLinkedList  *list = createList();
+  TEST_ASSERT_NULL(list->head);
+  TEST_ASSERT_NULL(list->tail);
+  TEST_ASSERT_EQUAL(0, list->count);
+  free(list);
+}
+
+void  test_createList_given_data(){
+  Data  data = {193, 0.333};
+  DoubleLinkedList  *list = createList();
+  TEST_ASSERT_NOT_NULL(list);
+  TEST_ASSERT_EQUAL(0, list->count);
+  TEST_ASSERT_EQUAL_PTR(NULL, list->head);
+  TEST_ASSERT_EQUAL_PTR(NULL, list->tail);
+  ListItem  item = {NULL, NULL, (void *)&data};
+  linkedListAddItemToHead(&item, list);
+  TEST_ASSERT_EQUAL_PTR(&item, list->head);
+  TEST_ASSERT_EQUAL_PTR(&item, list->tail);
+  TEST_ASSERT_EQUAL(193, ((Data *)(list->head->data))->val1);
+  TEST_ASSERT_EQUAL_FLOAT(0.333, ((Data *)(list->head->data))->val2);
+  free(list);
+}
+
+void  test_linkedListCreateListItem_given_empty(){
+  ListItem  *item = linkedListCreateListItem(0);
+  TEST_ASSERT_NULL(item->next);
+  TEST_ASSERT_NULL(item->prev);
+  TEST_ASSERT_NULL(item->data);
+  free(item);
+}
+
+
+void  test_linkedListCreateListItem_given_data(){
+  Data  data = {1010, 23.333};
+  ListItem  *item = linkedListCreateListItem((void  *)&data);
+  TEST_ASSERT_NOT_NULL(item);
+  TEST_ASSERT_EQUAL(1010, ((Data  *)(item->data))->val1);
+  TEST_ASSERT_EQUAL_FLOAT(23.333, ((Data  *)(item->data))->val2);
+  free(item);
+}
+
+
+void  test_linkedListFreeListItem(){
+  Data  data = {0123, 32.1911};
+  ListItem  *item = linkedListCreateListItem((void  *)&data);
+  TEST_ASSERT_EQUAL(0123, ((Data  *)(item->data))->val1);
+  TEST_ASSERT_EQUAL_FLOAT(32.1911, ((Data  *)(item->data))->val2);
+  TEST_ASSERT_EQUAL_PTR(&data, item->data);
+  TEST_ASSERT_EQUAL_PTR(NULL, item->next);
+  TEST_ASSERT_EQUAL_PTR(NULL, item->prev);
+  linkedListFreeListItem(item);
+}
+
 /* Add item to head.
  Before			
 ~~~~~~~ 
@@ -577,38 +637,9 @@ void test_DoubleLinkedList_remove_item_from_tail_4_items_inside_expect_item1_pre
   TEST_ASSERT_EQUAL_PTR(&item3, list.tail);
   TEST_ASSERT_EQUAL(3, list.count);
 }
-<<<<<<< HEAD
-
-void  test_linkedListCreateListItem_given_data(){
-  int data1 = 294;
-  IntegerListItem  *item = (IntegerListItem *)linkedListCreateListItem((void  *)data1);
-  TEST_ASSERT_NOT_NULL(item);
-  TEST_ASSERT_EQUAL(294, item->data);
-  TEST_ASSERT_EQUAL_PTR(NULL, item->prev);
-  TEST_ASSERT_EQUAL_PTR(NULL, item->next);
-  free(item);
-}
 
 
-void  test_linkedListCreateListItem_given_data_struct(){
-  Data data1 = {862, 28.3332};
-  ListItem  *item = linkedListCreateListItem(&data1);
-  Data  *dataptr = item->data;
-  TEST_ASSERT_NOT_NULL(item);
-  TEST_ASSERT_EQUAL(862, dataptr->val1);
-  TEST_ASSERT_EQUAL_FLOAT(28.3332, dataptr->val2);
-  TEST_ASSERT_EQUAL_PTR(NULL, item->prev);
-  TEST_ASSERT_EQUAL_PTR(NULL, item->next);
-  free(item);
-}
-
-void  freeData(void *dataToFree){
-  Data  *data = dataToFree;
-  if(data)
-    free(data);
-}
-
-void  test_linkedListFreeList(){
+void  test_linkedListCreateListItem_linkedListAddItemToHead_given_Data_struct(){
   Data  data1 = {10101, 293e-2};
   Data  data2 = {0x284, 12.456};
   Data  data3 = {0111, 5.6666};
@@ -638,7 +669,12 @@ void  test_linkedListFreeList(){
   TEST_ASSERT_EQUAL_FLOAT(5.6666, ((Data  *)(list.head->data))->val2);
   TEST_ASSERT_EQUAL_FLOAT(12.456, ((Data  *)(list.head->next->data))->val2);
   TEST_ASSERT_EQUAL_FLOAT(12.456, ((Data  *)(list.tail->prev->data))->val2);
-  //linkedListFreeList(&list, freeData);
+  if(item1)
+    free(item1);
+  if(item2)
+    free(item2);
+  if(item3)
+    free(item3);
 }
 
 
@@ -655,5 +691,4 @@ void  test_linkedListFreeList(){
   linkedListFreeList(list, freeData);
 }
 */
-=======
->>>>>>> 36e643cb719ca918896c8993c41eb400f1469a16
+

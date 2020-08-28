@@ -32,7 +32,8 @@
 :paths:
   :test:
     - +:test/**
-    - -:test/support
+    - -:src/MemAlloc
+#   - -:test/support
   :source:
     - src/**
   :support:

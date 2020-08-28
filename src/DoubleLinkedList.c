@@ -1,6 +1,7 @@
 #include "DoubleLinkedList.h"
 #include <stdio.h>
-#include <stdlib.h>
+//#include <stdlib.h>
+//#include  "MemAlloc.h"
 
 /* This function is to add items to the head of double linked list.
     Parameter: 1. Pointer points to items
@@ -115,7 +116,7 @@ ListItem* linkedListRemoveItemFromTail(DoubleLinkedList* accList)
 }
 
 DoubleLinkedList  *createList(){
-  DoubleLinkedList  *list = malloc(sizeof(DoubleLinkedList));
+  DoubleLinkedList  *list = memAlloc(sizeof(DoubleLinkedList));
   list->count = 0;
   list->head = NULL;
   list->tail = NULL;
@@ -123,7 +124,7 @@ DoubleLinkedList  *createList(){
 }
 
 ListItem  *linkedListCreateListItem(void  *data){
-  ListItem  *item = malloc(sizeof(ListItem));   
+  ListItem  *item = memAlloc(sizeof(DoubleLinkedList));   
   item->next = NULL;
   item->prev = NULL;
   item->data = data;
@@ -132,7 +133,7 @@ ListItem  *linkedListCreateListItem(void  *data){
 
 void  linkedListFreeListItem(ListItem *itemToFree){
   if(itemToFree)
-    free(itemToFree);
+    memFree(itemToFree);
 }
 
 void  linkedListFreeList(DoubleLinkedList *list, void (*freeFunction)(void *) ){
@@ -140,9 +141,9 @@ void  linkedListFreeList(DoubleLinkedList *list, void (*freeFunction)(void *) ){
   while(list->head != NULL){
     listptr = list->head;
     list->head = list->head->next;
-    //freeFunction(listptr->data);
+    freeFunction(listptr->data);
     linkedListFreeListItem(listptr);
     }
    if(list)
-     free(list);
+     memFree(list);
 }

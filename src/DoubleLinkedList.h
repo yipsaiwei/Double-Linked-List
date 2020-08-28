@@ -2,6 +2,7 @@
 #define DOUBLELINKEDLIST_H
 
 #include  "ListItem.h"
+#include  "MemAlloc.h"
 
 typedef	struct	DoubleLinkedList	DoubleLinkedList;
 struct	DoubleLinkedList{
@@ -18,5 +19,5 @@ ListItem *linkedListRemoveItemFromTail(DoubleLinkedList *list );
 ListItem  *linkedListCreateListItem(void  *data);
 void  linkedListFreeListItem(ListItem *itemToFree);
 void  linkedListFreeList(DoubleLinkedList *list, void (*freeFunction)(void *) );
-DoubleLinkedList  *createList();
+DoubleLinkedList  *createList(void);
 #endif // DOUBLELINKEDLIST_H

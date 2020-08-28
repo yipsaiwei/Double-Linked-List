@@ -1,6 +1,7 @@
 #include "unity.h"
 #include "DoubleLinkedList.h"
 #include  "IntegerListItem.h"
+#include  "MemAlloc.h"
 
 void setUp(void)
 {
@@ -9,7 +10,6 @@ void setUp(void)
 void tearDown(void)
 {
 }
-
 
 void  freeData(void *dataToFree){
   Data  *data = dataToFree;

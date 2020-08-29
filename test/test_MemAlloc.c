@@ -3,6 +3,7 @@
 //#include "MemAlloc.h"
 #include "mock_MemAlloc.h"
 #include  "mock_DummyFree.h"
+#include  "IntegerListItem.h"
 
 void setUp(void)
 {
@@ -14,17 +15,18 @@ void tearDown(void)
 
 
 void  test_createList_given(){
-  DoubleLinkedList  *list = malloc(sizeof(DoubleLinkedList));
-  memAlloc_ExpectAndReturn(sizeof(DoubleLinkedList), list);
-  list = createList();
-  free(list);
+  DoubleLinkedList  list = {NULL, NULL, 0};
+  DoubleLinkedList  *listptr;
+  memAlloc_ExpectAndReturn(sizeof(DoubleLinkedList), &list);
+  listptr = createList();
+  
 }
 
 void  test_linkedListCreateListItem_given(){
-  ListItem  *item = malloc(sizeof(DoubleLinkedList));
-  memAlloc_ExpectAndReturn(sizeof(ListItem), item);
-  item = linkedListCreateListItem(NULL);
-  free(item);
+  ListItem  item = {NULL, NULL, (void *)1234};
+  ListItem  *itemptr;
+  memAlloc_ExpectAndReturn(sizeof(ListItem), &item);
+  itemptr = linkedListCreateListItem(NULL);
 }
 
 void  test_linkedListFreeListItem_given(){
@@ -34,13 +36,14 @@ void  test_linkedListFreeListItem_given(){
 }
 
 void  test_linkedListFreeList_given_dummy(){
-  DoubleLinkedList  *list = malloc(sizeof(DoubleLinkedList));
-  ListItem  item = {NULL, NULL, (void  *)0123};
-  list->head = &item;
-  list->tail = &item;
-  dummyFree_Expect(list->head->data);
-  memFree_Expect(list);
+  DoubleLinkedList  list = {NULL, NULL, 0};
+  DoubleLinkedList  *listptr = &list;
+  ListItem  item = {NULL, NULL, (void  *)&data};
+  listptr->head = &item;
+  listptr->tail = &item;
+  dummyFree_Expect(listptr->head->data);
+  memFree_Expect(listptr);
   memFree_Expect(&item);
-  linkedListFreeList(list, dummyFree);
-  free(list);
+  linkedListFreeList(listptr, dummyFree);
 }
+

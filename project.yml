@@ -21,7 +21,7 @@
 #  :use_assembly: TRUE
 
 #:release_build:
-#  :output: MyApp.out
+#  :output: MyApp.exe
 #  :use_assembly: FALSE
 
 :environment:

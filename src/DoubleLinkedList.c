@@ -1,7 +1,6 @@
 #include "DoubleLinkedList.h"
 #include <stdio.h>
-//#include <stdlib.h>
-//#include  "MemAlloc.h"
+
 
 /* This function is to add items to the head of double linked list.
     Parameter: 1. Pointer points to items
@@ -115,11 +114,11 @@ ListItem* linkedListRemoveItemFromTail(DoubleLinkedList* accList)
 	}
 }
 
-DoubleLinkedList  *createList(){
+DoubleLinkedList  *linkedListCreateList(){
   DoubleLinkedList  *list = memAlloc(sizeof(DoubleLinkedList));
-  list->count = 0;
   list->head = NULL;
   list->tail = NULL;
+  list->count = 0;
   return  list;
 }
 

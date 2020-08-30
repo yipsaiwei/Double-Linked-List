@@ -19,5 +19,5 @@ ListItem *linkedListRemoveItemFromTail(DoubleLinkedList *list );
 ListItem  *linkedListCreateListItem(void  *data);
 void  linkedListFreeListItem(ListItem *itemToFree);
 void  linkedListFreeList(DoubleLinkedList *list, void (*freeFunction)(void *) );
-DoubleLinkedList  *createList(void);
+DoubleLinkedList  *linkedListCreateList(void);
 #endif // DOUBLELINKEDLIST_H

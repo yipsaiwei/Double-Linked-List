@@ -11,23 +11,18 @@ void tearDown(void)
 {
 }
 
-void  freeData(void *dataToFree){
-  Data  *data = dataToFree;
-  if(data)
-    free(data);
-}
 
-void  test_createList_given_empty(){
-  DoubleLinkedList  *list = createList();
+void  test_linkedListCreateList_given_empty(){
+  DoubleLinkedList  *list = linkedListCreateList();
   TEST_ASSERT_NULL(list->head);
   TEST_ASSERT_NULL(list->tail);
   TEST_ASSERT_EQUAL(0, list->count);
   free(list);
 }
 
-void  test_createList_given_data(){
+void  test_linkedListCreateList_given_data(){
   Data  data = {193, 0.333};
-  DoubleLinkedList  *list = createList();
+  DoubleLinkedList  *list = linkedListCreateList();
   TEST_ASSERT_NOT_NULL(list);
   TEST_ASSERT_EQUAL(0, list->count);
   TEST_ASSERT_EQUAL_PTR(NULL, list->head);
